@@ -69,4 +69,4 @@ Features:
 - Keep your API keys and secret keys secure
 - In production, set DEBUG=False and configure ALLOWED_HOSTS appropriately
 
-this repo has reallly taught me python
+
