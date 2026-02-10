@@ -8,7 +8,12 @@ if defined _OLD_CODEPAGE (
     "%SystemRoot%\System32\chcp.com" 65001 > nul
 )
 
-set VIRTUAL_ENV=C:\Users\Test\Desktop\PLP-PYTHON-WEEK-8-ASSIGNMENT\weather_project\venv
+rem Set VIRTUAL_ENV to the parent directory of the directory containing this script
+set "VIRTUAL_ENV=%~dp0.."
+rem Remove trailing backslash if present
+if "%VIRTUAL_ENV:~-1%"=="\" set "VIRTUAL_ENV=%VIRTUAL_ENV:~0,-1%"
+rem Convert to absolute path
+for %%I in ("%VIRTUAL_ENV%") do set "VIRTUAL_ENV=%%~fI"
 
 if not defined PROMPT set PROMPT=$P$G
 
