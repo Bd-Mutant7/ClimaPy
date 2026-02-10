@@ -203,8 +203,8 @@ else {
     }
     else {
         Write-Verbose "  Setting prompt based on parent's directory's name. (Is the directory name passed to venv module when creating the virtual environment)"
-        Write-Verbose "  Got leaf-name of $VenvDir='$(Split-Path -Path $venvDir -Leaf)'"
-        $Prompt = Split-Path -Path $venvDir -Leaf
+        Write-Verbose "  Got leaf-name of $VenvDir='$(Split-Path -Path $VenvDir -Leaf)'"
+        $Prompt = Split-Path -Path $VenvDir -Leaf
     }
 }
 
