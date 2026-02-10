@@ -35,18 +35,19 @@ deactivate () {
 # unset irrelevant variables
 deactivate nondestructive
 
+# Determine the directory containing this script
+VIRTUAL_ENV="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+export VIRTUAL_ENV
+
 # on Windows, a path can contain colons and backslashes and has to be converted:
 if [ "${OSTYPE:-}" = "cygwin" ] || [ "${OSTYPE:-}" = "msys" ] ; then
-    # transform D:\path\to\venv to /d/path/to/venv on MSYS
-    # and to /cygdrive/d/path/to/venv on Cygwin
-    export VIRTUAL_ENV=$(cygpath "C:\Users\Test\Desktop\PLP-PYTHON-WEEK-8-ASSIGNMENT\weather_project\venv")
-else
-    # use the path as-is
-    export VIRTUAL_ENV="C:\Users\Test\Desktop\PLP-PYTHON-WEEK-8-ASSIGNMENT\weather_project\venv"
+    # transform Windows path to Unix path on MSYS/Cygwin
+    VIRTUAL_ENV="$(cygpath -u "$VIRTUAL_ENV")"
+    export VIRTUAL_ENV
 fi
 
 _OLD_VIRTUAL_PATH="$PATH"
-PATH="$VIRTUAL_ENV/Scripts:$PATH"
+PATH="$VIRTUAL_ENV/bin:$PATH"
 export PATH
 
 # unset PYTHONHOME if set
