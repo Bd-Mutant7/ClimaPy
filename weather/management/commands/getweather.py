@@ -51,7 +51,7 @@ class Command(BaseCommand):
                 self.stderr.write(self.style.ERROR('Error: OPENWEATHER_API_KEY environment variable is not set'))
                 return
 
-            # Check cache first
+            
             cache_key = f"weather_{city.lower()}_{units}"
             cached_data = self.get_cached_weather(cache_key)
             
@@ -60,19 +60,19 @@ class Command(BaseCommand):
                 self.stdout.write(self.style.NOTICE('(Data from cache)'))
                 return
 
-            # OpenWeather API endpoint (using HTTPS)
+          
             url = f'https://api.openweathermap.org/data/2.5/weather?q={city}&appid={api_key}&units={units}'
 
             response = requests.get(url)
             
-            if response.status_code == 429:  # Rate limit exceeded
+            if response.status_code == 429: 
                 self.stderr.write(self.style.ERROR('Rate limit exceeded. Please try again later.'))
                 return
                 
             response.raise_for_status()
             data = response.json()
 
-            # Cache the response
+            
             self.cache_weather(cache_key, data)
             
             self.display_weather(data, city, units)
@@ -98,10 +98,12 @@ class Command(BaseCommand):
         wind_speed = data['wind']['speed']
         wind_unit = 'mph' if units == 'imperial' else 'm/s'
 
-        # Display weather information
-        self.stdout.write('\n' + self.style.SUCCESS(f'Weather in {city.title()}:'))
+       
+        self.stdout.write('\n' + self.style.SUCCESS(f'=== ClimaPy Weather Report ==='))
+        self.stdout.write(f'Location: {city.title()}')
         self.stdout.write(f'Temperature: {self.format_temperature(temp, units)}')
         self.stdout.write(f'Feels like: {self.format_temperature(feels_like, units)}')
         self.stdout.write(f'Humidity: {humidity}%')
         self.stdout.write(f'Conditions: {description.title()}')
-        self.stdout.write(f'Wind Speed: {wind_speed} {wind_unit}\n')
+        self.stdout.write(f'Wind Speed: {wind_speed} {wind_unit}')
+        self.stdout.write(self.style.SUCCESS('=' * 31) + '\n')
