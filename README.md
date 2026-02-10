@@ -37,7 +37,7 @@ python manage.py getweather "Kenya"
 ```
 ## Get weather in Fahrenheit
 ```bash
-python manage.py getweather "New York" --units imperial
+python manage.py getweather "Kenya" --units imperial
 ```
 ## Features:
 
@@ -65,4 +65,5 @@ Keep your API keys and secret keys secure
 
 In production, set DEBUG=False and configure ALLOWED_HOSTS appropriately
 ```
+
 
